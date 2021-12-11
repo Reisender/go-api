@@ -1,4 +1,4 @@
-package response
+package openapi
 
 type Link struct {
 	Rel string `json:"rel"`

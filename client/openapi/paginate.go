@@ -12,13 +12,19 @@ var ErrStopPagination = fmt.Errorf("stop pagination")
 
 func Paginate(ctx context.Context, c api.Client, endpoint string, params Params, page func([]byte) error) error {
 	// parse the path
-	path, err := c.NewURL(params.Prefix() + endpoint)
+	prefix := ""
+	if !isNil(params) {
+		prefix = params.Prefix()
+	}
+	path, err := c.NewURL(prefix + endpoint)
 	if err != nil {
 		return err
 	}
 
 	// add the params
-	path.RawQuery = params.Values().Encode()
+	if !isNil(params) {
+		path.RawQuery = params.Values().Encode()
+	}
 
 	// setup values for the pagination loop
 	next := path.String()

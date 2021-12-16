@@ -32,6 +32,19 @@ type ErrStatusCode struct {
 }
 
 func (esc ErrStatusCode) Error() string {
+	switch esc.Code {
+	case http.StatusBadRequest:
+		return "bad request"
+	case http.StatusUnauthorized:
+		return "unauthorized"
+	case http.StatusForbidden:
+		return "forbidden"
+	case http.StatusNotFound:
+		return "not found"
+	case http.StatusInternalServerError:
+		return "internal server error"
+	}
+
 	return fmt.Sprintf("error status code %d", esc.Code)
 }
 

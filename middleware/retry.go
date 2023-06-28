@@ -78,11 +78,9 @@ func RetryWithDelay(retry uint, delayMin, delayMax time.Duration, delayRamp floa
 				case <-time.After(delay):
 					// update the delay for the backoff
 					if delay < delayMax {
-						fmt.Printf("setting to max delay (%v) from (%v)\n", delayMax, delay)
 						delay = time.Duration(float32(delay) * delayRamp)
 					}
 					if delay > delayMax {
-						fmt.Printf("setting to max delay (%v) from (%v)\n", delayMax, delay)
 						delay = delayMax
 					}
 

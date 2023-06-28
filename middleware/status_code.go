@@ -1,20 +1,22 @@
 package middleware
 
 import (
-	"fmt"
 	"go-api"
 	"net/http"
 )
 
+// StatusCodeRange is a range of status codes
 type StatusCodeRange struct {
 	Low  int
 	High int
 }
 
+// InRange checks a status code to see if it is in the range
 func (scr StatusCodeRange) InRange(code int) bool {
 	return (code >= scr.Low && code <= scr.High)
 }
 
+// InRanges checks to see if the status code is in the ranges
 func InRanges(code int, ranges []StatusCodeRange) bool {
 	for _, codeRange := range ranges {
 		if codeRange.InRange(code) {
@@ -25,29 +27,18 @@ func InRanges(code int, ranges []StatusCodeRange) bool {
 	return false
 }
 
-// This is used when you want to handle a certain status code
+// ErrStatusCode This is used when you want to handle a certain status code
 // as an error.
 type ErrStatusCode struct {
-	Code int
+	Status string
+	Code   int
 }
 
 func (esc ErrStatusCode) Error() string {
-	switch esc.Code {
-	case http.StatusBadRequest:
-		return "bad request"
-	case http.StatusUnauthorized:
-		return "unauthorized"
-	case http.StatusForbidden:
-		return "forbidden"
-	case http.StatusNotFound:
-		return "not found"
-	case http.StatusInternalServerError:
-		return "internal server error"
-	}
-
-	return fmt.Sprintf("error status code %d", esc.Code)
+	return esc.Status
 }
 
+// ErrorOnStatusCodes will return an error on certain status codes
 func ErrorOnStatusCodes(statusCodes ...StatusCodeRange) api.Middleware {
 	// return the middleware func
 	return func(next api.Dofn) api.Dofn {
@@ -64,7 +55,7 @@ func ErrorOnStatusCodes(statusCodes ...StatusCodeRange) api.Middleware {
 
 			// now see if it is an error code to convert to error
 			if InRanges(res.StatusCode, statusCodes) {
-				return res, ErrStatusCode{res.StatusCode}
+				return res, ErrStatusCode{res.Status, res.StatusCode}
 			}
 
 			return res, err

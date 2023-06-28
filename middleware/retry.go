@@ -89,10 +89,10 @@ func RetryWithDelay(retry uint, delayMin, delayMax time.Duration, delayRamp floa
 				}
 			}
 
-			if err != nil {
-				err = ErrMaxRetries{err}
-			} else if InRanges(resp.StatusCode, ranges) {
+			if resp != nil && InRanges(resp.StatusCode, ranges) {
 				err = ErrMaxRetries{ErrStatusCode{resp.Status, resp.StatusCode}}
+			} else if err != nil {
+				err = ErrMaxRetries{err}
 			}
 
 			return resp, err

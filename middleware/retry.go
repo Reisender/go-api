@@ -2,9 +2,10 @@ package middleware
 
 import (
 	"fmt"
-	"go-api"
 	"net/http"
 	"time"
+
+	"github.com/Reisender/go-api"
 )
 
 // ErrMaxRetries is the error that represents when the max number of retries has been reached

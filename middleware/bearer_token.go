@@ -1,8 +1,9 @@
 package middleware
 
 import (
-	"go-api"
 	"net/http"
+
+	"github.com/Reisender/go-api"
 )
 
 func BearerToken(token string) api.Middleware {

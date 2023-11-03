@@ -3,8 +3,9 @@ package openapi
 import (
 	"context"
 	"encoding/json"
-	"go-api"
 	"net/url"
+
+	"github.com/Reisender/go-api"
 )
 
 func Count(ctx context.Context, c api.Client, endpoint string, params Params) (int, error) {

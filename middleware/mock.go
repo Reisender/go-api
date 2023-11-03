@@ -4,8 +4,9 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"go-api"
 	"net/http"
+
+	"github.com/Reisender/go-api"
 )
 
 // NewMock mocks the Do func and doesn't

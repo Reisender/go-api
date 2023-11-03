@@ -3,10 +3,11 @@ package middleware_test
 import (
 	"context"
 	"errors"
-	"go-api/middleware"
 	"net/http"
 	"testing"
 	"time"
+
+	"github.com/Reisender/go-api/middleware"
 )
 
 const retries = 3

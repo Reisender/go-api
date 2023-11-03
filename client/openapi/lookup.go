@@ -3,7 +3,8 @@ package openapi
 import (
 	"context"
 	"encoding/json"
-	"go-api"
+
+	"github.com/Reisender/go-api"
 )
 
 // Lookup is a common implementation of a single resource lookup.

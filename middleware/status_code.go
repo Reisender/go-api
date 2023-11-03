@@ -1,8 +1,9 @@
 package middleware
 
 import (
-	"go-api"
 	"net/http"
+
+	"github.com/Reisender/go-api"
 )
 
 // StatusCodeRange is a range of status codes

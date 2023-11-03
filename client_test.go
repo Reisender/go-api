@@ -5,11 +5,12 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"go-api"
-	"go-api/middleware"
 	"io/ioutil"
 	"net/http"
 	"testing"
+
+	"github.com/Reisender/go-api"
+	"github.com/Reisender/go-api/middleware"
 )
 
 func TestNewClient(t *testing.T) {

@@ -4,8 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"go-api"
 	"net/http"
+
+	"github.com/Reisender/go-api"
 )
 
 var ErrStopPagination = fmt.Errorf("stop pagination")
